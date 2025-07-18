@@ -6,26 +6,62 @@ const Student = require('./models/Student');
 const { sendWelcomeEmail, sendUpdateNotification, sendDeletionNotification } = require('./utils/emailService');
 
 const app = express();
-app.use(cors());
+// Configure CORS for mobile access
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Configure request parsing with increased limits for images
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+// Request logging middleware
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error('Error:', err);
-    res.status(500).json({
+    console.error('Error details:', {
+        message: err.message,
+        stack: err.stack,
+        url: req.url,
+        method: req.method,
+        body: req.body,
+        timestamp: new Date().toISOString()
+    });
+    
+    res.status(err.status || 500).json({
         success: false,
-        message: err.message || 'Internal Server Error'
+        message: process.env.NODE_ENV === 'production' 
+            ? 'An error occurred' 
+            : err.message,
+        error: process.env.NODE_ENV === 'production' 
+            ? {} 
+            : err
     });
 });
 
 // Initialize database and create tables
 async function initializeDatabase() {
     try {
-        await sequelize.sync({ alter: true });
-        console.log('Database synchronized successfully');
+        await sequelize.authenticate();
+        console.log('Database connection established successfully');
+        
+        // Force sync in development, alter in production
+        if (process.env.NODE_ENV === 'development') {
+            await sequelize.sync({ force: true });
+            console.log('Database tables recreated');
+        } else {
+            await sequelize.sync({ alter: true });
+            console.log('Database tables altered if necessary');
+        }
     } catch (error) {
         console.error('Database initialization error:', error);
+        throw error; // Rethrow to prevent app from starting with DB issues
     }
 }
 
