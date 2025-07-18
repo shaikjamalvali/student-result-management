@@ -6,9 +6,10 @@
 
 <img width="1500" height="850" alt="image" src="https://github.com/user-attachments/assets/2945d24e-f8ab-4393-b140-6b706c5bc0fa" />
 
- 
+
+ ![WhatsApp Image 2025-07-19 at 01 55 32_a4bb587f](https://github.com/user-attachments/assets/2caa4156-83f8-46eb-a78e-af1c2a3a2e93)
+
 ![WhatsApp Image 2025-07-19 at 01 55 32_faebccc7](https://github.com/user-attachments/assets/dc5e9c78-6e47-48b2-923f-9306ca9c7c84)
-![WhatsApp Image 2025-07-19 at 01 55 32_faebccc7](https://github.com/user-attachments/assets/35494ac4-9524-42d6-b9fc-62f6b5203b04)
 
 # Student Management System - MERN Project
 
