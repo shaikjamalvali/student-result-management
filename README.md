@@ -1,3 +1,14 @@
+<img width="1900" height="867" alt="image" src="https://github.com/user-attachments/assets/e46977dd-8ac3-4671-8c94-6ad6afacadde" />
+
+
+<img width="1706" height="832" alt="image" src="https://github.com/user-attachments/assets/a6120496-3c9b-4592-8824-db81177b101c" />
+
+
+<img width="1822" height="850" alt="image" src="https://github.com/user-attachments/assets/2945d24e-f8ab-4393-b140-6b706c5bc0fa" />
+
+
+![Uploading WhatsApp Image 2025-07-19 at 01.55.32_50b49a87.jpg…]()
+![WhatsApp Image 2025-07-19 at 01 55 32_faebccc7](https://github.com/user-attachments/assets/dc5e9c78-6e47-48b2-923f-9306ca9c7c84)
 
 # Student Management System - MERN Project
 
