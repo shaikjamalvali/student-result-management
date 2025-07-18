@@ -9,7 +9,13 @@ import Header from "./components/Header";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-axios.defaults.baseURL = "http://localhost:8090/";
+import API_URL from './config';
+
+// Configure axios defaults
+axios.defaults.baseURL = API_URL;
+axios.defaults.withCredentials = true; // Enable credentials
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 function App() {
   const showSuccessToast = () => {

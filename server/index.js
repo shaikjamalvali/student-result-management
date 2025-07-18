@@ -6,16 +6,46 @@ const Student = require('./models/Student');
 const { sendWelcomeEmail, sendUpdateNotification, sendDeletionNotification } = require('./utils/emailService');
 
 const app = express();
-app.use(cors());
+// Configure CORS to allow access from all devices
+app.use(cors({
+    origin: true, // Allow all origins
+    credentials: true, // Allow credentials
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+}));
+
+// Handle preflight requests
+app.options('*', cors());
+
+// Configure body parsing with increased limits for images
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+// Request logging middleware
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    console.log('Headers:', req.headers);
+    next();
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error('Error:', err);
-    res.status(500).json({
+    console.error('Error details:', {
+        timestamp: new Date().toISOString(),
+        method: req.method,
+        url: req.url,
+        headers: req.headers,
+        body: req.body,
+        error: {
+            message: err.message,
+            stack: err.stack
+        }
+    });
+
+    res.status(err.status || 500).json({
         success: false,
-        message: err.message || 'Internal Server Error'
+        message: err.message || 'Internal Server Error',
+        timestamp: new Date().toISOString()
     });
 });
 
