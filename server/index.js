@@ -8,8 +8,8 @@ const { sendWelcomeEmail, sendUpdateNotification, sendDeletionNotification } = r
 const app = express();
 // Configure CORS to allow access from all devices
 app.use(cors({
-    origin: ['https://your-frontend-url.vercel.app', 'http://localhost:3000'],
-    credentials: true,
+    origin: true, // Allow all origins
+    credentials: true, // Allow credentials
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 }));
