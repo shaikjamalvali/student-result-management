@@ -46,7 +46,10 @@ If you're interested in contributing to this project, feel free to:
 - Create a new branch for your feature or bug fix.
 - Make your changes and submit a pull request.
 - Discuss ideas or improvements in the Issues section.
-
+**
+commands**
+server- npm run dev
+client- npm start
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
